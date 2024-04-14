@@ -18,3 +18,7 @@ class User(BaseModel):
 @app.post("/data")
 def data(user_details:User):
     return user_details
+
+@app.get("/ping")
+def ping():
+    return "pong"
