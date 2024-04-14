@@ -1,10 +1,20 @@
-#uvicorn main:app --reload
-from fastapi import FastAPI, Request, Form 
-from fastapi.templating import Jinja2Templates
+from fastapi import FastAPI
+from pydantic import BaseModel
 
-app FastAPI()
-templates = Jinja2Templates (directory="/code")
+app = FastAPI()
 
 @app.get("/")
-def form_post(request: Request):
-   return templates.TemplateResponse('form.html', context={'request': request})
+def home():
+    return {"Hello": "world"}
+
+
+class User(BaseModel):
+    first_name: str
+    last_name : str
+    password: str
+    phone: int
+
+
+@app.post("/data")
+def data(user_details:User):
+    return user_details
